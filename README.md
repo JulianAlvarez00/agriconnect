@@ -1,82 +1,181 @@
 # AgroTalent 🌾
 
-Conectando el talento rural con oportunidades en el campo argentino.
-
 ![AgroTalent Preview](https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=1200&h=400)
 
-## 🚀 Descripción
 
-AgroTalent es una plataforma innovadora diseñada para conectar trabajadores rurales calificados con propietarios de campos en Argentina. A través de una interfaz intuitiva y un bot de WhatsApp, facilitamos el proceso de búsqueda y contratación en el sector agrícola.
+A platform connecting agricultural workers with job opportunities in the field.
 
-## ✨ Características Principales
+## 🌟 Features
 
-- 🤖 **Bot de WhatsApp Inteligente**: Sistema automatizado para matching de perfiles
-- 👥 **Conexión Directa**: Comunicación inmediata entre empleadores y trabajadores
-- ✅ **Perfiles Verificados**: Sistema de validación de experiencia y referencias
-- 📱 **Interfaz Responsive**: Diseño adaptable a todos los dispositivos
+- Landing page with responsive design
+- WhatsApp integration for instant communication
+- Automated response system
+- Job posting and application system
 
-## 🛠️ Tecnologías Utilizadas
+## 🏗 Architecture
+
+```mermaid
+flowchart TD
+    A[Landing Page] --> B[WhatsApp Button]
+    B --> C[Twilio API]
+    C --> D[Webhook Handler]
+    D --> E[Automated Responses]
+    E --> F[User WhatsApp]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#bbf,stroke:#333,stroke-width:2px
+    style F fill:#bfb,stroke:#333,stroke-width:2px
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 16+
+- npm or yarn
+- Twilio account
+- WhatsApp enabled phone number
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/field-jobs-platform.git
+cd field-jobs-platform
+```
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Configure environment variables
+```bash
+# Create .env file in whatsapp-bot directory
+TWILIO_ACCOUNT_SID=your_sid_here
+TWILIO_AUTH_TOKEN=your_token_here
+TWILIO_WHATSAPP_NUMBER=+14155238886
+PORT=3001
+```
+
+4. Start the development server
+```bash
+npm run dev
+```
+
+## 📱 WhatsApp Integration
+
+### Flow Diagram
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant L as Landing Page
+    participant B as Backend
+    participant T as Twilio
+    participant W as WhatsApp
+
+    U->>L: Clicks WhatsApp button
+    L->>B: POST /api/whatsapp/start-chat
+    B->>T: Send initial message
+    T->>W: Deliver message
+    W->>U: Receive welcome message
+    U->>W: Send response
+    W->>T: Forward message
+    T->>B: Webhook notification
+    B->>T: Send automated response
+    T->>W: Deliver response
+    W->>U: Receive automated response
+```
+
+### Features
+
+- Instant connection through WhatsApp
+- Automated response system
+- Menu-driven interaction
+- Real-time message handling
+
+### Response Menu
+
+1. **Initial Contact**
+   - Welcome message
+   - Main menu options
+
+2. **Menu Options**
+   - View job opportunities
+   - Post a job
+   - Speak with an advisor
+
+3. **Automated Responses**
+   - Customized responses based on user selection
+   - Option to connect with human advisor
+
+## 🛠 Technical Stack
 
 - **Frontend**:
-  - React 18
+  - React
   - TypeScript
   - Tailwind CSS
-  - Lucide Icons
   - Vite
 
-## 🚀 Instalación y Uso
+- **Backend**:
+  - Node.js
+  - Express
+  - TypeScript
+  - Twilio SDK
 
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/tu-usuario/agrotalent.git
-   cd agrotalent
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Iniciar el servidor de desarrollo**
-   ```bash
-   npm run dev
-   ```
-
-4. **Construir para producción**
-   ```bash
-   npm run build
-   ```
-
-## 🌐 Estructura del Proyecto
+## 📦 Project Structure
 
 ```
-agrotalent/
+project/
 ├── src/
-│   ├── components/         # Componentes React reutilizables
-│   ├── assets/            # Recursos estáticos
-│   └── App.tsx            # Componente principal
-├── public/                # Archivos públicos
-└── package.json          # Dependencias y scripts
+│   ├── components/
+│   │   ├── WhatsAppButton.tsx
+│   │   ├── CTASection.tsx
+│   │   └── ...
+│   └── ...
+├── whatsapp-bot/
+│   ├── src/
+│   │   ├── config/
+│   │   │   └── twilio.ts
+│   │   ├── controllers/
+│   │   │   └── whatsappController.ts
+│   │   ├── routes/
+│   │   │   └── whatsappRoutes.ts
+│   │   └── app.ts
+│   ├── .env
+│   └── package.json
+└── package.json
 ```
 
-## 🤝 Contribuir
+## 🔧 Configuration
 
-1. Fork del repositorio
-2. Crear una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit de tus cambios (`git commit -m 'Add: AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abrir un Pull Request
+### Twilio Setup
 
-## 📄 Licencia
+1. Create a Twilio account
+2. Enable WhatsApp Sandbox
+3. Configure webhook URL
+4. Set up environment variables
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+### Webhook Configuration
 
-## 📞 Contacto
+Configure your Twilio webhook URL:
+- URL: `https://your-domain.com/api/whatsapp/webhook`
+- Method: POST
+- Content Type: application/json
 
-- **WhatsApp**: [+54 9 11 1234-5678](https://wa.me/+5491112345678)
-- **Email**: contacto@agrotalent.com.ar
-- **Website**: [www.agrotalent.com.ar](https://www.agrotalent.com.ar)
+## 📄 License
 
----
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
-Desarrollado con ❤️ para el campo argentino
+## 🤝 Contributing
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📞 Support
+
+For support, contact us through our WhatsApp channel or create an issue in the repository.
