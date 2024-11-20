@@ -1,3 +1,4 @@
+// src/components/CTASection.tsx
 import { MessageCircle } from 'lucide-react';
 import { WhatsAppButton } from './WhatsAppButton';
 
@@ -19,3 +20,5 @@ export function CTASection() {
     </section>
   );
 }
+
+export default CTASection;
